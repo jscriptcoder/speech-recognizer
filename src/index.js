@@ -2,12 +2,30 @@ const SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
 const SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent
 
 const DEFAULT_CONFIG = {
+  // Controls whether continuous results are returned for each recognition, or
+  // only a single result.
   continuous: true,
+
+  // Controls whether interim results should be returned (true) or not (false).
+  // Interim results are results that are not yet final.
   interimResults: true,
+
+  // Sets the maximum number of SpeechRecognitionAlternatives provided per
+  // SpeechRecognitionResult.
   maxAlternatives: 1,
+
+  // Sets the language of the current SpeechRecognition. If not specified, this
+  // defaults to the HTML lang attribute value, or the user agent's language
+  // setting if that isn't set either.
   lang: 'en',
+
+  // CSS class for the trigger element.
   clsTrigger: 'speech-recognizer-trigger',
+
+  // CSS class for the trigger element indicating we're listening
   clsTriggerRecognizing: 'speech-recognizer-trigger--recognizing',
+
+  // TODO: document
   onaudiostart() {}, onaudioend() {},
   onstart() {}, onend() {},
   onsoundstart() {}, onsoundend() {},
