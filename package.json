@@ -1,0 +1,29 @@
+{
+  "name": "speech-recognizer",
+  "version": "1.0.0",
+  "description": "Voice to text using HTML5 Speech Recognition API",
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "babel src/index.js -o lib/index.js",
+    "copy:js": "cp lib/index.js example/script.js",
+    "bundle:example": "browserify src/example.js -o example/script.js -t [ babelify ]",
+    "prebuild:example": "npm run build",
+    "build:example": "npm run bundle:example",
+    "example": "npm run build:example",
+    "postexample": "cd example && live-server",
+    "preexample:watch": "npm run example &",
+    "example:watch": "watch 'npm run build:example' src"
+  },
+  "author": "Francisco Ramos <jscriptcoder@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babelify": "^8.0.0",
+    "browserify": "^16.2.2",
+    "live-server": "^1.2.0",
+    "watch": "^1.0.2"
+  }
+}
