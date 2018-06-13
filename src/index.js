@@ -6,33 +6,36 @@ const DEFAULT_CONFIG = {
   interimResults: true,
   maxAlternatives: 1,
   lang: 'en',
-  clsInput: 'speech-recognizer-input',
-  clsInputRecognizing: 'speech-recognizer-input--recognizing',
-  clsActivate: 'speech-recognizer-activate',
-  clsActivateRecognizing: 'speech-recognizer-activate--recognizing',
-  beforeSpeech: "Say what you want. I'm listening...",
-  onstart() {},
+  clsTrigger: 'speech-recognizer-trigger',
+  clsTriggerRecognizing: 'speech-recognizer-trigger--recognizing',
+  onaudiostart() {}, onaudioend() {},
+  onstart() {}, onend() {},
+  onsoundstart() {}, onsoundend() {},
+  onspeechstart() {}, onspeechend() {},
   onresult() {},
-  onend() {},
+  onerror() {},
+  onnomatch() {},
 }
 
-export function createSpeechRecognizer(input, config = {}) {
+export default function createSpeechRecognizer(trigger, config = {}) {
   config = { ...DEFAULT_CONFIG, ...config }
 
   if (SpeechRecognition) {
 
+    // New recognizer instance
     const recognizer = {
-      input,
-      button: document.createElement('button'),
-      recognizing: false,
+      trigger, // Element that will trigger the speach recognition
+      recognizing: false, // Will indicate whether or not we're listening
+
+      // https://developer.mozilla.org/en-US/docs/Web/API/SpeechRecognition/SpeechRecognition
       speech: new SpeechRecognition(),
     }
 
     configureRecognizer(config, recognizer)
-    setupControls(config, recognizer)
+    setupTrigger(config, recognizer)
 
     return recognizer
-    
+
   } else {
     // Speech Recognition not supported
   }
@@ -50,39 +53,26 @@ function configureRecognizer(config, recognizer) {
 }
 
 function setupRecognizerListeners(config, recognizer) {
-  const { speech, input, button } = recognizer
+  const { speech, trigger } = recognizer
 
-  // speech.onaudioend = _ => {
-  //   console.log('onaudioend')
-  // }
-  //
-  // speech.onaudiostart = _ => {
-  //   console.log('onaudiostart')
-  // }
+  speech.onaudiostart = config.onaudiostart
+  speech.onaudioend = config.onaudioend
+  speech.onerror = config.onerror
+  speech.onnomatch = config.onnomatch
+  speech.onsoundstart = config.onsoundstart
+  speech.onsoundend = config.onsoundend
+  speech.onspeechstart = config.onspeechstart
+  speech.onspeechend = config.onspeechend
 
   speech.onend = e => {
-    // console.log('onend', e)
-
-    recognizer.recognizing = false
-    input.placeholder = input.dataset['originalPlaceholder']
-    input.classList.remove(config.clsInputRecognizing)
-    button.classList.remove(config.clsActivateRecognizing)
-
+    recognizer.recognizing = false // Indicates that we stop listening
+    trigger.classList.remove(config.clsActivateRecognizing)
     config.onend(recognizer)
   }
 
-  speech.onerror = e => {
-    console.log('onerror', e)
-  }
-
-  // speech.onnomatch = _ => {
-  //   console.log('onnomatch')
-  // }
-
   speech.onresult = e => {
-    console.log('onresult', e)
-
-    input.value = toArray(e.results).reduce((acc, result) => {
+    // TODO: think about this logic
+    const transcript = toArray(e.results).reduce((acc, result) => {
       if (result.isFinal) {
         return result[0].transcript
       } else {
@@ -93,31 +83,9 @@ function setupRecognizerListeners(config, recognizer) {
     config.onresult(e, recognizer)
   }
 
-  // speech.onsoundend = _ => {
-  //   console.log('onsoundend')
-  // }
-  //
-  // speech.onsoundstart = _ => {
-  //   console.log('onsoundstart')
-  // }
-  //
-  // speech.onspeechend = _ => {
-  //   console.log('onspeechend')
-  // }
-  //
-  // speech.onspeechstart = _ => {
-  //   console.log('onspeechstart')
-  // }
-
   speech.onstart = e => {
-    // console.log('onstart', e)
-
-    recognizer.recognizing = true
-    input.value = ''
-    input.placeholder = config.beforeSpeech
-    input.classList.add(config.clsInputRecognizing)
-    button.classList.add(config.clsActivateRecognizing)
-
+    recognizer.recognizing = true // Indicates that we're listening
+    trigger.classList.add(config.clsActivateRecognizing)
     config.onstart(recognizer)
   }
 
@@ -128,23 +96,12 @@ function toArray(arrLike) {
 }
 
 function setupControls(config, recognizer) {
-  const { input, button } = recognizer
-
-  input.classList.add(config.clsInput)
-  button.classList.add(config.clsActivate)
-
-  input.dataset['originalPlaceholder'] = input.placeholder
-  button.addEventListener('click', createClickHandler(recognizer))
-
-  if (input.nextSibling) {
-    input.parentNode.insertBefore(button, input.nextSibling)
-  } else {
-    input.parentNode.appendChild(button)
-  }
-
+  const { trigger } = recognizer
+  trigger.classList.add(config.clsActivate)
+  trigger.addEventListener('click', createTriggerHandler(recognizer))
 }
 
-function createClickHandler(recognizer) {
+function createTriggerHandler(recognizer) {
   const { speech } = recognizer
 
   return _ => {
@@ -155,5 +112,3 @@ function createClickHandler(recognizer) {
     }
   }
 }
-
-module.exports = createSpeechRecognizer
