@@ -80,7 +80,7 @@ interface RecognizerConfig {
   // Will run when the speech recognition service returns a result — a word or
   // phrase has been positively recognized and this has been communicated back
   // to the app.
-  onresult(transcription: SpeechRecognitionResultList, idx: number, event, recognizer): void;
+  onresult(results: RecognizerResultList, idx: number, event, recognizer): void;
 
   // Will run when a speech recognition error occurs.
   onerror(event: SpeechRecognitionEvent, recognizer: Recognizer): void;
@@ -89,4 +89,12 @@ interface RecognizerConfig {
   // no significant recognition.
   onnomatch(event: SpeechRecognitionEvent, recognizer: Recognizer): void;
 }
+
+interface RecognizerResult {
+  transcript: string;
+  confidence: number;
+  isFinal: boolean;
+}
+
+type RecognizerResultList  = RecognizerResult[];
 ```
