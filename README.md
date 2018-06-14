@@ -73,37 +73,20 @@ interface RecognizerConfig {
   // has been detected.
   onspeechstart(event: SpeechRecognitionEvent, recognizer: Recognizer): void;
 
-  /**
-   * Will run when speech recognised by the speech recognition service has
-   * stopped being detected.
-   * @param {SpeechRecognitionEvent} event
-   * @param {Recognizer} recognizer
-   */
+  // Will run when speech recognised by the speech recognition service has
+  // stopped being detected.
   onspeechend(event: SpeechRecognitionEvent, recognizer: Recognizer): void;
 
-  /**
-   * Will run when the speech recognition service returns a result — a word or
-   * phrase has been positively recognized and this has been communicated back
-   * to the app.
-   * @param {SpeechRecognitionResultList} results
-   * @param {SpeechRecognitionEvent} event
-   * @param {Recognizer} recognizer
-   */
-  onresult(transcription, idx, event: SpeechRecognitionEvent, recognizer): void;
+  // Will run when the speech recognition service returns a result — a word or
+  // phrase has been positively recognized and this has been communicated back
+  // to the app.
+  onresult(transcription: SpeechRecognitionResultList, idx: number, event, recognizer): void;
 
-  /**
-   * Will run when a speech recognition error occurs.
-   * @param {SpeechRecognitionEvent} event
-   * @param {Recognizer} recognizer
-   */
-  onerror(event, recognizer: Recognizer): void;
+  // Will run when a speech recognition error occurs.
+  onerror(event: SpeechRecognitionEvent, recognizer: Recognizer): void;
 
-  /**
-   * Will run when the speech recognition service returns a final result with
-   * no significant recognition.
-   * @param {SpeechRecognitionEvent} event
-   * @param {Recognizer} recognizer
-   */
+  // Will run when the speech recognition service returns a final result with
+  // no significant recognition.
   onnomatch(event: SpeechRecognitionEvent, recognizer: Recognizer): void;
 }
 ```
