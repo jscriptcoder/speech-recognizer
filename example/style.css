@@ -25,7 +25,11 @@ body {
   height: 100%;
 }
 
-.what-is-said {
+.notepad-wrapper {
+  position: relative;
+}
+
+.notepad {
   width: 508px;
   overflow: hidden;
   background-color: #FFF;
@@ -35,7 +39,6 @@ body {
   font-size: 1em;
   resize: none;
   line-height: 40px;
-  margin-top: 20px;
   padding-left: 100px;
   padding-right: 40px;
   padding-top: 40px;
@@ -45,40 +48,24 @@ body {
   outline: none;
 }
 
-.speech-recognizer-wrapper {
-  position: relative;
-  display: flex;
-  flex-direction: row-reverse;
-}
-
-.speech-recognizer-input {
-  height: 23px;
-  padding: 8px 40px 8px 8px;
-  width: 600px;
-  font-family: Arial;
-  font-size: 1em;
-  border: 0;
-  outline: none;
-  box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.75);
-}
-
-.speech-recognizer-activate {
+.speech-recognizer-trigger {
   position: absolute;
-  margin-left: -11px;
+  top: 8px;
+  right: 8px;
   border: 0;
-  background: var(--microphone) no-repeat -3px 9px;
+  background: var(--microphone) no-repeat 0 0;
   background-size: 24px 24px;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%;
-  width: 17px;
+  height: 24px;
+  width: 24px;
   vertical-align: middle;
   outline: none;
+  cursor: pointer;
 }
 
-.speech-recognizer-input--recognizing {}
-.speech-recognizer-activate--recognizing {}
+.speech-recognizer-trigger--recognizing {}
 
 @keyframes waves {
   0% {
@@ -93,8 +80,8 @@ body {
   }
 }
 
-.speech-recognizer-activate--recognizing:before,
-.speech-recognizer-activate--recognizing:after {
+.speech-recognizer-trigger--recognizing:before,
+.speech-recognizer-trigger--recognizing:after {
   position: absolute;
   display: block;
   content: "";
@@ -107,12 +94,12 @@ body {
   animation-iteration-count: infinite;
 }
 
-.speech-recognizer-activate--recognizing:before {
+.speech-recognizer-trigger--recognizing:before {
   border: 2px #00a3cb solid;
   animation-delay: 0s;
 }
 
-.speech-recognizer-activate--recognizing:after {
+.speech-recognizer-trigger--recognizing:after {
   border: 2px #c3e060 solid;
   animation-delay: 0.3s;
 }

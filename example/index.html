@@ -7,10 +7,10 @@
 </head>
 <body ng-app="example">
   <div class="container">
-    <div class="speech-recognizer-wrapper">
-      <input id="talk-to-me" type="text" placeholder="Type something or click on the microphone..." />
+    <div class="notepad-wrapper">
+      <textarea id="notepad" placeholder="Click on the microphone on upper right corner..." class="notepad" rows="5" readonly></textarea>
+      <button id="trigger-recognition"></button>
     </div>
-    <textarea id="what-is-said" class="what-is-said" rows="10" disabled></textarea>
   </div>
   <script src="script.js"></script>
 </body>
