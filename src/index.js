@@ -147,8 +147,8 @@ export default function createSpeechRecognizer(trigger, config = {}) {
 
 
 /**
- * @param {RecognizerConfig}
- * @param {Recognizer}
+ * @param {RecognizerConfig} config
+ * @param {Recognizer} recognizer
  */
 function configureRecognizer(config, recognizer) {
   const { speech } = recognizer
@@ -162,8 +162,8 @@ function configureRecognizer(config, recognizer) {
 }
 
 /**
- * @param {RecognizerConfig}
- * @param {Recognizer}
+ * @param {RecognizerConfig} config
+ * @param {Recognizer} recognizer
  */
 function setupRecognizerListeners(config, recognizer) {
   const { speech, trigger } = recognizer
@@ -215,8 +215,8 @@ function toArray(arrLike) {
 }
 
 /**
- * @param {RecognizerConfig}
- * @param {Recognizer}
+ * @param {RecognizerConfig} config
+ * @param {Recognizer} recognizer
  */
 function setupTrigger(config, recognizer) {
   const { trigger } = recognizer
@@ -225,7 +225,7 @@ function setupTrigger(config, recognizer) {
 }
 
 /**
- * @param {Recognizer}
+ * @param {Recognizer} recognizer
  * @returns {Function} onclick handler
  */
 function createTriggerHandler(recognizer) {
