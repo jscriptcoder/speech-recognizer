@@ -289,7 +289,7 @@ var notepad = document.getElementById('notepad');
 var trigger = document.getElementById('trigger-recognition');
 
 var capitalize = function capitalize(s) {
-  return s.replace(s.substr(0, 1), function (m) {
+  return s.replace(s.trim().substr(0, 1), function (m) {
     return m.toUpperCase();
   });
 };
@@ -299,16 +299,25 @@ var toArray = function toArray(arrLike) {
 
 var results = [];
 
+var notepadText = notepad.value;
+
 (0, _lib2.default)(trigger, {
   continuous: true,
   onresult: function onresult(results) {
-    notepad.value = results.reduce(function (acc, result) {
-      if (result.isFinal) {
-        return '' + acc + result.transcript + '.';
-      } else {
-        return '' + acc + result.transcript;
-      }
-    }, '');
+    var transcription = results.reduce(function (acc, result) {
+      return {
+        transcript: result.isFinal ? result.transcript + '.' : acc.transcript + result.transcript,
+
+        isFinal: result.isFinal
+      };
+    }, { transcript: '', isFinal: false });
+
+    var transcript = capitalize(transcription.transcript);
+    if (transcription.isFinal) {
+      notepad.value = notepadText += transcript;
+    } else {
+      notepad.value = notepadText + transcript;
+    }
   }
 });
 

@@ -1,5 +1,7 @@
 @import "variables.css";
 
+* { box-sizing: border-box; }
+
 body {
   top: 0;
   left: 0;
@@ -30,7 +32,7 @@ body {
 }
 
 .notepad {
-  width: 508px;
+  width: 700px;
   overflow: hidden;
   background-color: #FFF;
   color: #222;
@@ -45,6 +47,7 @@ body {
   padding-bottom: 34px;
 	background-image: var(--notepad-lines), var(--notepad-paper);
 	background-repeat: repeat-y, repeat;
+  background-size: 100%, auto;
   outline: none;
 }
 
