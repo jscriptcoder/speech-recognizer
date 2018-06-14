@@ -93,11 +93,11 @@ const DEFAULT_CONFIG = {
    * Will run when the speech recognition service returns a result — a word or
    * phrase has been positively recognized and this has been communicated back
    * to the app.
-   * @param {SpeechRecognitionResultList} results
+   * @param {RecognizerResultList} results
    * @param {SpeechRecognitionEvent} event
    * @param {Recognizer} recognizer
    */
-  onresult(transcription, idx, event, recognizer) {},
+  onresult(results, idx, event, recognizer) {},
 
   /**
    * Will run when a speech recognition error occurs.

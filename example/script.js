@@ -111,11 +111,11 @@ var DEFAULT_CONFIG = {
    * Will run when the speech recognition service returns a result — a word or
    * phrase has been positively recognized and this has been communicated back
    * to the app.
-   * @param {SpeechRecognitionResultList} results
+   * @param {RecognizerResultList} results
    * @param {SpeechRecognitionEvent} event
    * @param {Recognizer} recognizer
    */
-  onresult: function onresult(transcription, idx, event, recognizer) {},
+  onresult: function onresult(results, idx, event, recognizer) {},
 
   /**
    * Will run when a speech recognition error occurs.
@@ -165,8 +165,8 @@ function createSpeechRecognizer(trigger) {
 }
 
 /**
- * @param {RecognizerConfig}
- * @param {Recognizer}
+ * @param {RecognizerConfig} config
+ * @param {Recognizer} recognizer
  */
 function configureRecognizer(config, recognizer) {
   var speech = recognizer.speech;
@@ -180,8 +180,8 @@ function configureRecognizer(config, recognizer) {
 }
 
 /**
- * @param {RecognizerConfig}
- * @param {Recognizer}
+ * @param {RecognizerConfig} config
+ * @param {Recognizer} recognizer
  */
 function setupRecognizerListeners(config, recognizer) {
   var speech = recognizer.speech,
@@ -250,8 +250,8 @@ function toArray(arrLike) {
 }
 
 /**
- * @param {RecognizerConfig}
- * @param {Recognizer}
+ * @param {RecognizerConfig} config
+ * @param {Recognizer} recognizer
  */
 function setupTrigger(config, recognizer) {
   var trigger = recognizer.trigger;
@@ -261,7 +261,7 @@ function setupTrigger(config, recognizer) {
 }
 
 /**
- * @param {Recognizer}
+ * @param {Recognizer} recognizer
  * @returns {Function} onclick handler
  */
 function createTriggerHandler(recognizer) {
