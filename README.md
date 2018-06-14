@@ -1,7 +1,7 @@
 # Speech Recognizer
 Voice to text using HTML5 Speech Recognition API.
 
-[Demo here]()
+**See [demo here]()**
 
 ## Motivation
 No many people know there is a nice Speech Recognition API built-in right in the browser. Maybe some pre-trained model?, RNN/LSTM architecture?. Support is not the best, but hey! why not to provide with it if it's there?. Might be very useful. Anyway, this was more for me to explore this API and learn about it. So I decided to build a wrapper to this API, and make it a bit more user friendly ;-)
@@ -25,6 +25,14 @@ interface Recognizer {
 ```
 `config` contains the configuration items for the `recognizer`. Here is in more details:
 ```ts
+interface RecognizerResult {
+  transcript: string;
+  confidence: number;
+  isFinal: boolean;
+}
+
+type RecognizerResultList  = RecognizerResult[];
+
 interface RecognizerConfig {
   // Controls whether continuous results are returned for each recognition, or
   // only a single result.
@@ -89,12 +97,12 @@ interface RecognizerConfig {
   // no significant recognition.
   onnomatch(event: SpeechRecognitionEvent, recognizer: Recognizer): void;
 }
-
-interface RecognizerResult {
-  transcript: string;
-  confidence: number;
-  isFinal: boolean;
-}
-
-type RecognizerResultList  = RecognizerResult[];
 ```
+
+## Installing and running example
+```
+$ npm install
+$ npm run example
+```
+
+Browser will open http://localhost:8080/. Talk to the browser :wink:
