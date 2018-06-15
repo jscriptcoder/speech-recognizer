@@ -7,7 +7,7 @@ Voice to text using HTML5 Speech Recognition API.
 No many people know there is a nice Speech Recognition API built-in right in the browser. Maybe some pre-trained model?, RNN/LSTM architecture?. Support is not the best, but hey! why not to provide with the feature if it's there?. Might be very useful. Anyway, this was more for me to explore this API and learn about it. So I decided to build layer on top of it and make it a bit more dev friendly ;-)
 
 ## API
-The library exposes ony one factory function (I simply don't like classes):
+The library exposes only one factory function (I simply don't like classes):
 ```ts
 createSpeechRecognizer(trigger: HTMLElement, config: RecognizerConfig): Recognizer
 ```
