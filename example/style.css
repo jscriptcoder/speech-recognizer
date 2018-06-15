@@ -99,6 +99,12 @@ body {
   }
 }
 
+.speech-recognizer-trigger--no-support {
+  filter: grayscale(90%);
+}
+
+.speech-recognizer-trigger--no-support:before {}
+
 .speech-recognizer-trigger--recognizing:before,
 .speech-recognizer-trigger--recognizing:after {
   position: absolute;

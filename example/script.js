@@ -47,6 +47,9 @@ var DEFAULT_CONFIG = {
   // CSS class for the trigger element indicating we're listening
   clsTriggerRecognizing: 'speech-recognizer-trigger--recognizing',
 
+  // CSS class for the trigger element indicating no support.
+  clsTriggerNoSupport: 'speech-recognizer-trigger--no-support',
+
   /**
    * Will run when the user agent has started to capture audio.
    * @param {SpeechRecognitionEvent} event
@@ -160,7 +163,7 @@ function createSpeechRecognizer(trigger) {
 
     return recognizer;
   } else {
-    // TODO: Speech Recognition not supported
+    trigger.classList.add(config.clsTriggerNoSupport);
   }
 }
 
