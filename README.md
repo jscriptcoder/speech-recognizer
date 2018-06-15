@@ -9,7 +9,7 @@ No many people know there is a nice Speech Recognition API built-in right in the
 ## API
 The library exposes only one factory function (I simply don't like classes):
 ```ts
-createSpeechRecognizer(trigger: HTMLElement, config: RecognizerConfig): Recognizer
+createSpeechRecognizer(trigger: HTMLElement, config: RecognizerConfig): Recognizer | undefined
 ```
 `trigger` is the element that will be used to start (and stop) manually the speech recognition. `Recognizer` instance has the following interface:
 ```ts
