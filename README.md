@@ -56,6 +56,9 @@ interface RecognizerConfig {
 
   // CSS class for the trigger element indicating we're listening
   clsTriggerRecognizing: string;
+  
+  // CSS class for the trigger element indicating no support.
+  clsTriggerNoSupport: 'speech-recognizer-trigger--no-support',
 
   // Will run when the user agent has started to capture audio.
   onaudiostart(event: SpeechRecognitionEvent, recognizer: Recognizer): void;
