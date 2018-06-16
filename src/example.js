@@ -12,7 +12,7 @@ let notepadText = notepad.value
 
 // There is an issue in mobile Chrome for Android:
 // https://stackoverflow.com/questions/35112561/speech-recognition-api-duplicated-phrases-on-android
-let lastFinalTranscript = '' // We need to sort of debounce this guy
+let lastTranscript = '' // We need to sort of debounce this guy
 
 createSpeechRecognizer(trigger, {
   continuous: true,
@@ -27,14 +27,17 @@ createSpeechRecognizer(trigger, {
       }
     }, { transcript: '', isFinal: false })
 
-    const transcript = capitalize(transcription.transcript)
-    if (transcription.isFinal) {
-      if (transcript !== lastFinalTranscript) {
+    if (transcription.transcript !== lastTranscript) {
+
+      lastTranscript = transcription.transcript
+
+      const transcript = capitalize(transcription.transcript)
+      if (transcription.isFinal) {
         notepad.value = notepadText += transcript
-        lastFinalTranscript = transcript
+      } else {
+        notepad.value = notepadText + transcript
       }
-    } else {
-      notepad.value = notepadText + transcript
+      
     }
 
   }
