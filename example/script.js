@@ -304,10 +304,6 @@ var results = [];
 
 var notepadText = notepad.value;
 
-// There is an issue in mobile Chrome for Android:
-// https://stackoverflow.com/questions/35112561/speech-recognition-api-duplicated-phrases-on-android
-var lastTranscript = ''; // We need to sort of debounce this guy
-
 (0, _lib2.default)(trigger, {
   continuous: true,
   onresult: function onresult(results) {
@@ -319,16 +315,11 @@ var lastTranscript = ''; // We need to sort of debounce this guy
       };
     }, { transcript: '', isFinal: false });
 
-    if (transcription.transcript !== lastTranscript) {
-
-      lastTranscript = transcription.transcript;
-
-      var transcript = capitalize(transcription.transcript);
-      if (transcription.isFinal) {
-        notepad.value = notepadText += transcript;
-      } else {
-        notepad.value = notepadText + transcript;
-      }
+    var transcript = capitalize(transcription.transcript);
+    if (transcription.isFinal) {
+      notepad.value = notepadText += transcript;
+    } else {
+      notepad.value = notepadText + transcript;
     }
   }
 });
