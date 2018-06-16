@@ -304,6 +304,10 @@ var results = [];
 
 var notepadText = notepad.value;
 
+// There is an issue in mobile Chrome for Android:
+// https://stackoverflow.com/questions/35112561/speech-recognition-api-duplicated-phrases-on-android
+var lastFinalTranscript = ''; // We need to sort of debounce this guy
+
 (0, _lib2.default)(trigger, {
   continuous: true,
   onresult: function onresult(results) {
@@ -317,7 +321,10 @@ var notepadText = notepad.value;
 
     var transcript = capitalize(transcription.transcript);
     if (transcription.isFinal) {
-      notepad.value = notepadText += transcript;
+      if (transcript !== lastFinalTranscript) {
+        notepad.value = notepadText += transcript;
+        lastFinalTranscript = transcript;
+      }
     } else {
       notepad.value = notepadText + transcript;
     }
