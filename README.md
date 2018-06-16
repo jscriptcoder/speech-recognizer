@@ -6,6 +6,8 @@ Voice to text using HTML5 Speech Recognition API.
 ## Motivation
 No many people know there is a nice Speech Recognition API built-in right in the browser. Maybe some pre-trained model?, RNN/LSTM architecture?. Support is not the best, but hey! why not to provide with the feature if it's there?. Might be very useful. Anyway, this was more for me to explore this API and learn about it. So I decided to build layer on top of it and make it a bit more dev friendly ;-)
 
+**Note:** There seems to be a [bug in mobile Chrome for Android](https://stackoverflow.com/questions/35112561/speech-recognition-api-duplicated-phrases-on-android). I didn't bother to implement a work around since this is more an experiment. Feel free to ask if you need it or even go ahead with a PR ;-)
+
 ## API
 The library exposes only one factory function (I simply don't like classes):
 ```ts
