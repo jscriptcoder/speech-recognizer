@@ -111,3 +111,5 @@ $ npm run example
 ```
 
 Browser will open http://localhost:8080/. Talk to the browser :wink:
+
+<!-- sort 1 -->
